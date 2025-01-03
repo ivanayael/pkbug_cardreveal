@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Imagenes PKM expansions -- > Surging Sparks </title>
+    <style>
+        /* Estilo de la galería */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .gallery-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 150px;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .gallery img:hover {
+            transform: scale(1.1);
+            border-color: #000;
+        }
+        .gallery-description {
+            margin-top: 5px;
+            font-size: 0.9em;
+            text-align: center;
+            color: #333;
+        }
+
+        /* Estilo del modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 5px;
+        }
+        .modal:target {
+            display: flex;
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .modal-close:hover {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>PKM expansions Image Gallery Bug Reveal -- > Surging Sparks </h1>
+
+    <p>Encontré una vulnerabilidad en el sitio publicitario del nuevo juego de cartas y es posible ver todo la coleccion de cartas que forman el juego Surging Sparks</p>
+    <p>Si no quieren tener vulnerabilidades asi en su sitio se pueden contactar conmigo a <a href="mailto:ivanayaelcurra@gmail.com">ivanayaelcurra@gmail.com</a></p>
+   
+   <p>I found a vulnerabity in the marketing site por the new pokemon card game that let you se all the cards of the Surging Sparks pack</p>
+   <p>If you don't want to have this kind of bugs in your site you can contact me at <a href="mailto:ivanayaelcurra@gmail.com">ivanayaelcurra@gmail.com</a></p>
+   
+    <div class="gallery" id="gallery"></div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <a href="#" class="modal-close">&times;</a>
+        <img id="modal-img" src="" alt="Imagen ampliada">
+    </div>
+
+    <script>
+        // Configuración del rango de imágenes y el formato del enlace
+        const gallery = document.getElementById('gallery');
+        const modalImg = document.getElementById('modal-img');
+        const baseUrl = "https://dz3we2x72f7ol.cloudfront.net/expansions/surging-sparks/en-us/SV08_EN_";
+        const extension = "-2x.png";
+
+        // Generar imágenes del 00 al 252
+        for (let i = 1; i <= 252; i++) {
+            const imgNumber = i < 10 ? `0${i}` : i.toString();
+            const imgUrl = `${baseUrl}${imgNumber}${extension}`;
+            const description = `Imagen número ${i}`; // Descripción dinámica
+
+            // Crear contenedor para la imagen y descripción
+            const item = document.createElement('div');
+            item.classList.add('gallery-item');
+
+            // Crear elemento de imagen
+            const imgElement = document.createElement('img');
+            imgElement.src = imgUrl;
+            imgElement.alt = `Imagen ${imgNumber}`;
+            imgElement.addEventListener('click', () => {
+                modalImg.src = imgUrl; // Cambiar la imagen del modal
+                location.href = "#modal"; // Abrir el modal
+            });
+
+            // Crear descripción
+            const descriptionElement = document.createElement('div');
+            descriptionElement.classList.add('gallery-description');
+            descriptionElement.textContent = description;
+
+            // Agregar imagen y descripción al contenedor
+            item.appendChild(imgElement);
+            item.appendChild(descriptionElement);
+
+            // Agregar contenedor a la galería
+            gallery.appendChild(item);
+        }
+    </script>
+</body>
+</html>
